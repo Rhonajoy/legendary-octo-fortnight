@@ -4,11 +4,13 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <div className="relative min-h-screen bg-gray-900 text-white">
+    <div className="relative  w-full bg-gray-900 text-white overflow-hidden">
+
+
       {/* Background with overlay */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 w-full h-full">
         <img
-         src="/src/assets/samuel-regan-asante-wMkaMXTJjlQ-unsplash.jpg"
+         src="/bg.jpg"
         
           alt="background"
           className="w-full h-full object-cover"

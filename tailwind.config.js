@@ -1,17 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-   content: [
+module.exports = {
+  content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", 
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ["Poppins", "ui-sans-serif", "system-ui"], 
-        heading: ["Montserrat", "ui-sans-serif", "system-ui"], 
-      },
-    },
+    extend: {},
   },
   plugins: [],
-}
-
+};
