@@ -1,54 +1,84 @@
 import React, { useState } from "react";
 import { auth } from "../firebase";
-
 import { useAuth } from "../../contexts/authContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link, Navigate } from "react-router-dom";
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Notification } from "../app/Notification";
 export default function Signup() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [confirmPassword, setconfirmPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isRegistering, setIsRegistering] = useState(false);
   const { userLoggedIn } = useAuth();
+
+  const [notification, setNotification] = useState<{
+    type: "success" | "error";
+    title: string;
+    message: string;
+  } | null>(null);
+   const navigate = useNavigate()
   const handleSignup = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     if (!isRegistering) {
       setIsRegistering(true);
     }
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      alert("Account created successfully!");
+      setNotification({
+        type: "success",
+        title: "Account Created",
+        message: "Your account has been created successfully.",
+      });
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/signin");
     } catch (err: unknown) {
+      let errorMsg = "An unexpected error occurred.";
       if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("An unexpected error occurred");
+        errorMsg = err.message;
       }
+      setNotification({
+        type: "error",
+        title: "Signup Failed",
+        message: errorMsg,
+      });
+    } finally {
+      setIsRegistering(false);
     }
   };
 
   return (
     <>
-      {userLoggedIn && <Navigate to={"/"} replace={true} />}
-      <div className="flex items-center justify-center min-h-screen bg-gray-900">
+      {/* {userLoggedIn && <Navigate to={"/"} replace={true} />} */}
+
+      <div className="flex items-center justify-center min-h-screen w-full bg-gray-900">
         <div className="bg-black p-8 rounded-2xl shadow-lg w-full max-w-sm">
           <h2 className="text-2xl font-bold text-center text-white mb-4">
             Create Account
           </h2>
-          <p className="text-gray-400 text-center mb-6">
-            Already have an account?{" "}
-            {/* <span
-            onClick={switchToLogin}
-            className="text-blue-400 cursor-pointer"
-          >
-            Login
-          </span> */}
-          </p>
 
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+
+          {notification && (
+            <div className="mb-4">
+              <Notification
+                type={notification.type}
+                title={notification.title}
+                message={notification.message}
+                onClose={() => setNotification(null)}
+              />
+            </div>
+          )}
 
           <form onSubmit={handleSignup} className="space-y-4">
             <input
@@ -56,30 +86,25 @@ export default function Signup() {
               placeholder="Email address"
               className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
               value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setEmail(e.target.value)
-              }
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
-              disabled={isRegistering}
               type="password"
               placeholder="Password"
               className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
               value={password}
               required
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setPassword(e.target.value)
-              }
+              disabled={isRegistering}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <input
-              disabled={isRegistering}
               type="password"
               placeholder="Confirm Password"
               className="w-full px-4 py-2 rounded-lg bg-gray-800 text-white focus:outline-none"
               value={confirmPassword}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setconfirmPassword(e.target.value)
-              }
+              required
+              disabled={isRegistering}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <button
               type="submit"
@@ -92,15 +117,6 @@ export default function Signup() {
             >
               {isRegistering ? "Signing Up..." : "Sign Up"}
             </button>
-            <div className="text-sm text-center">
-              Already have an account? {"   "}
-              <Link
-                to={"/login"}
-                className="text-center text-sm hover:underline font-bold"
-              >
-                Continue
-              </Link>
-            </div>
           </form>
         </div>
       </div>

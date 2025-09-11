@@ -1,16 +1,21 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
 import "./App.css";
 import Login from "./components/authentication/Login";
+import { BrowserRouter, Route,  Routes } from "react-router-dom";
+import Home from "./components/Home";
 import Signup from "./components/authentication/Signup";
 
 function App() {
   return (
     <>
-    {/* <Login/> */}
-    <Signup/>
-      <h1 className="text-orange-600 font-bold  p-4">Tailwind is Working</h1>
+    
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/signin" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+   
+     
     </>
   );
 }

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { auth, signInWithGoogle } from "../firebase";
-import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
+import {  signInWithEmailAndPassword } from "firebase/auth";
 import { useAuth } from "../../contexts/authContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import { Notification } from "../app/Notification";
 
 export default function Login() {
   const { userLoggedIn } = useAuth();
@@ -10,7 +11,12 @@ export default function Login() {
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+    const [notification, setNotification] = useState<{
+      type: "success" | "error";
+      title: string;
+      message: string;
+    } | null>(null);
+    const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isSigningIn) {
@@ -18,10 +24,22 @@ export default function Login() {
     }
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful!");
+      setNotification({
+        type: "success",
+        title: "Login Successful",
+        message: "You have successfully Logged In.",
+      });
     } catch (err) {
+       let errorMsg = "An unexpected error occurred.";
       if (err instanceof Error) setError(err.message);
-    } finally {
+      setNotification({
+        type: "error",
+        title: "Signup Failed",
+        message: errorMsg,
+      });
+    }
+     
+     finally {
       setIsSigningIn(false);
     }
   };
@@ -43,7 +61,7 @@ export default function Login() {
 
   return (
     <>
-      {userLoggedIn && <Navigate to={""} replace={true} />}
+      {/* {userLoggedIn && <Navigate to={""} replace={true} />} */}
       <div className="flex items-center justify-center min-h-screen bg-gray-900">
         <div className="bg-black p-8 rounded-2xl shadow-lg w-full max-w-sm">
           <h2 className="text-2xl font-bold text-center text-white mb-4">
@@ -51,10 +69,20 @@ export default function Login() {
           </h2>
           <p className="text-gray-400 text-center mb-6">
             Don't have an account?{" "}
-            <span className="text-blue-400 cursor-pointer">Sign up</span>
+            <button className="text-blue-400 cursor-pointer" onClick={() => navigate("/signup")}>Sign up</button>
           </p>
 
           {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
+            {notification && (
+                      <div className="mb-4">
+                        <Notification
+                          type={notification.type}
+                          title={notification.title}
+                          message={notification.message}
+                          onClose={() => setNotification(null)}
+                        />
+                      </div>
+                    )}
 
           <form onSubmit={handleLogin} className="space-y-4">
             <input
@@ -73,7 +101,7 @@ export default function Login() {
             />
             <button
               type="submit"
-              className="w-full py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-semibold"
+              className="w-full py-2 bg-orange-600 hover:bg-red-700 rounded-lg text-white font-semibold"
             >
               Login
             </button>
@@ -96,13 +124,7 @@ export default function Login() {
                 className="w-6 h-6"
               />
             </button>
-            <button className="bg-gray-800 p-3 rounded-xl hover:bg-gray-700">
-              <img
-                src="https://www.svgrepo.com/show/349442/apple.svg"
-                alt="Apple"
-                className="w-6 h-6"
-              />
-            </button>
+            
           </div>
         </div>
       </div>
