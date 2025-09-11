@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { auth } from "../firebase";
-import { useAuth } from "../../contexts/authContext";
+// import { useAuth } from "../../contexts/authContext";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Notification } from "../app/Notification";
 export default function Signup() {
   const [email, setEmail] = useState<string>("");
@@ -10,7 +10,7 @@ export default function Signup() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [isRegistering, setIsRegistering] = useState(false);
-  const { userLoggedIn } = useAuth();
+  // const { userLoggedIn } = useAuth();
 
   const [notification, setNotification] = useState<{
     type: "success" | "error";

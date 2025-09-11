@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { auth, signInWithGoogle } from "../firebase";
 import {  signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../../contexts/authContext";
-import { Navigate, useNavigate } from "react-router-dom";
+// import { useAuth } from "../../contexts/authContext";
+import {  useNavigate } from "react-router-dom";
 import { Notification } from "../app/Notification";
 
 export default function Login() {
-  const { userLoggedIn } = useAuth();
+  // const { userLoggedIn } = useAuth();
   const [email, setEmail] = useState("");
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [password, setPassword] = useState("");
