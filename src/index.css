@@ -2,47 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-html, body, #root {
-  width: 100%;
+/* Ensure full-screen layout */
+html,
+body,
+#root {
   height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-
 }
 
-
-
-
-
-:root {
-  --border: 220 14% 96%;
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+/* Optional: Set a default background color for body (dark mode compatible) */
+body {
+  @apply bg-black text-white;
 }
 
-.dark {
-  --border: 217 19% 27%;
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-}
-
-
-html, body, #root {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-
-}
-
-
-
-
-
+/* Custom CSS variables */
 :root {
   --border: 220 14% 96%;
   --background: 0 0% 100%;

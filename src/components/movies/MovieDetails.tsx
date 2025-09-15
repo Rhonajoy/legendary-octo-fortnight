@@ -1,45 +1,48 @@
 import { Button } from "@/components/ui/button";
 import { Star } from "lucide-react";
-import  type { Movie } from "../../Services/movieService";
+import type { Movie } from "../../Services/MovieService";
 import type { JSX } from "react";
 
 interface MovieDetailsProps {
-  movie: Movie | null;
+  movie: Movie;
+  onSeeMore: (movie: Movie) => void;
 }
 
-export default function MovieDetails({ movie }: MovieDetailsProps): JSX.Element | null {
-  if (!movie) return null;
-
+export default function MovieDetails({ movie, onSeeMore }: MovieDetailsProps): JSX.Element {
   return (
-    <section className="grid md:grid-cols-2 gap-6">
-      <div className="bg-zinc-900 rounded-lg p-4 flex items-center justify-center">
-        {movie.poster_path ? (
+    <section className="bg-zinc-900 rounded-xl shadow-lg overflow-hidden flex flex-col">
+      <div className="p-4 flex items-center justify-center">
+        {movie.poster_path && (
           <img
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
-            className="rounded-lg"
+            className="rounded-lg shadow-md"
+            loading="lazy"
           />
-        ) : (
-          <span className="text-lg">{movie.title} Poster</span>
+        
+         
         )}
       </div>
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-between p-4 flex-1">
         <div>
-          <h3 className="text-xl font-bold flex items-center gap-2">
-            {movie.title}
-            <span className="flex items-center gap-1 text-yellow-400 text-sm">
-              <Star className="w-4 h-4" /> {movie.vote_average?.toFixed(1)}
-            </span>
-          </h3>
-          <p className="text-sm text-zinc-400 mt-2">{movie.overview}</p>
+          <h3 className="text-lg font-semibold truncate">{movie.title}</h3>
+          <div className="flex items-center gap-1 text-yellow-400 text-sm mt-1">
+            <Star className="w-4 h-4" />
+            {movie.vote_average?.toFixed(1)}
+          </div>
+          <p className="text-sm text-zinc-400 mt-2 line-clamp-3">{movie.overview}</p>
           <p className="text-xs text-zinc-500 mt-1">
             Release Date: {movie.release_date}
           </p>
-          
         </div>
 
-        <Button className="bg-teal-500 hover:bg-teal-600 w-32">See More</Button>
+        <Button
+          onClick={() => onSeeMore(movie)}
+          className="mt-4 w-full bg-rose-600 hover:bg-rose-700 text-white rounded-lg py-2 hover:opacity-90 transition"
+        >
+          See More
+        </Button>
       </div>
     </section>
   );

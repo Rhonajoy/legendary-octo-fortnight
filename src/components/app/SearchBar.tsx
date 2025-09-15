@@ -6,10 +6,8 @@ interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
 }
-
-export default function SearchBar({ value, onChange }: SearchBarProps): JSX.Element {
-  return (
-    <div className="relative w-64">
+export const SearchBar = ({ value, onChange }: SearchBarProps) => (
+  <div className="relative w-64">
       <Input
         type="text"
         placeholder="Search movies..."
@@ -20,4 +18,4 @@ export default function SearchBar({ value, onChange }: SearchBarProps): JSX.Elem
       <Search className="w-4 h-4 absolute left-2 top-1/2 -translate-y-1/2 text-zinc-500" />
     </div>
   );
-}
+
