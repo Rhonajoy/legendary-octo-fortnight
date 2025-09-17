@@ -77,7 +77,7 @@ export const Login = () => {
         loop
         muted
         playsInline
-        preload="none"
+        preload="auto"
         poster="bg.jpg"
         className="fixed  top-0 left-0 w-full h-full object-cover z-0"
       >

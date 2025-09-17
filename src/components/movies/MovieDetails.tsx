@@ -16,6 +16,7 @@ export default function MovieDetails({ movie, onSeeMore }: MovieDetailsProps): J
           <img
             src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
             alt={movie.title}
+            sizes="(max-width: 600px) 400px, (max-width: 1200px) 800px, 1200px"
             className="rounded-lg shadow-md"
             loading="lazy"
           />

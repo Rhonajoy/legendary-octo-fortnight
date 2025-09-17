@@ -1,13 +1,14 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { fetchMovieDetails, searchMovies } from "@/Services/MovieService";
 import type { Movie } from "@/Services/MovieService";
 import { SearchBar, Loader } from "../app";
 import MovieList from "../movies/MovieList";
-import MovieModal from "../movies/MovieModal";
+
 import { User } from "lucide-react";
 import { useAuth } from "@/contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
+const MovieModal = lazy(() => import('../movies/MovieModal'));
 export const MainPage = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
@@ -76,10 +77,12 @@ export const MainPage = () => {
         </main>
 
         {selectedMovie && (
+          <Suspense fallback={<div>Loading Movies </div>}>
           <MovieModal
             movie={selectedMovie}
             onClose={() => setSelectedMovie(null)}
           />
+          </Suspense>
         )}
         {!loading && movies.length > 0 && (
           <div className="flex justify-center gap-4 mt-6">

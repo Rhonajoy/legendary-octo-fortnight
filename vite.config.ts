@@ -4,6 +4,8 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig(({ mode }) => {
+
+  
   // Load env file for the current mode
   const env = loadEnv(mode, process.cwd(), "");
 
@@ -26,6 +28,19 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       ...defineEnv
-    }
+    },
+
+    build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return 'vendor'; // Groups all dependencies into a single chunk
+          }
+        },
+      },
+    },
+  },
   };
+
 });

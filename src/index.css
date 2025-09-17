@@ -13,20 +13,4 @@ body,
   overflow-x: hidden;
 }
 
-/* Optional: Set a default background color for body (dark mode compatible) */
-body {
-  @apply bg-black text-white;
-}
 
-/* Custom CSS variables */
-:root {
-  --border: 220 14% 96%;
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-}
-
-.dark {
-  --border: 217 19% 27%;
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-}
