@@ -1,5 +1,3 @@
-import type { JSX } from "react";
-
 export const Loader = () => (
  
     <div className="flex justify-center items-center p-6">
