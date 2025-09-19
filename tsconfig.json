@@ -1,13 +1,30 @@
 {
   "compilerOptions": {
-    "module":"esnext",
-    "moduleResolution": "bundler", 
-    "esModuleInterop": true,
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
     "jsx": "react-jsx",
+    
+    /* Linting & Strictness */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
+    
+    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
+    
+    /* Type Definitions */
     "types": [
       "jest",
       "@testing-library/jest-dom"
@@ -17,14 +34,16 @@
     "src",
     "tailwind.config.ts",
     "jest.config.cjs",
-    "vite.config.ts"
+    "vite.config.ts",
+    "jest.setup.ts",
+    "postcss.config.ts",
+    "eslint.config.js"
   ],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
-    }
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    "out"
   ]
 }
