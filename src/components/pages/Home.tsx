@@ -20,8 +20,10 @@ export const Home = () => {
       </video>
 
       <div className="relative z-10 flex flex-col flex-1">
-        <header className="flex justify-between items-center px-8 py-6">
-          <h1 className="text-rose-600 text-4xl font-bold">R&JMOVIES</h1>
+        <header className="flex flex-col sm:flex-row sm:justify-between sm:items-center px-4 sm:px-8 py-4 sm:py-6 gap-3 sm:gap-0">
+          <h1 className="text-rose-600 text-3xl sm:text-4xl font-bold">
+            R&JMOVIES
+          </h1>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

@@ -27,6 +27,8 @@ export const signInWithGoogle = async (): Promise<UserCredential> => {
   return result;
 };
 
+
+
 export const signOutUser = (): Promise<void> => {
   return auth.signOut();
 };

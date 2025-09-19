@@ -43,6 +43,7 @@
     "@vitejs/plugin-react": "^5.0.2",
     "@vitejs/plugin-react-swc": "^4.0.0",
     "autoprefixer": "^10.4.21",
+    "depcheck": "^1.4.7",
     "dotenv": "^17.2.2",
     "eslint": "^9.33.0",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -57,6 +58,4 @@
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2"
   }
-  
 }
-
