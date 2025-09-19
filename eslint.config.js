@@ -1,11 +1,11 @@
-// eslint.config.js
+
 import js from "@eslint/js";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
 
 export default [
-  // Global configurations for all files
+ 
   {
     ignores: [
       "node_modules/",
@@ -16,11 +16,11 @@ export default [
     ],
   },
   
-  // Apply standard ESLint and TypeScript configurations
+
   js.configs.recommended,
   ...tseslint.configs.recommended,
   
-  // Custom configuration for your specific project rules
+
   {
     files: ["**/*.{ts,tsx,js,jsx}"],
     plugins: {
@@ -32,7 +32,7 @@ export default [
       sourceType: "module",
       parser: tseslint.parser,
       parserOptions: {
-        // ✅ Point to your new ESLint-specific tsconfig file
+        
         project: "./tsconfig.eslint.json",
         tsconfigRootDir: import.meta.dirname,
       },
@@ -59,8 +59,7 @@ export default [
       },
     },
   },
-  
-  // Overrides for CommonJS files like `jest.config.cjs`
+
   {
     files: ["jest.config.cjs"],
     languageOptions: {

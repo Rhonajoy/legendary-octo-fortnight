@@ -5,7 +5,8 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.js",
-    "**/*.jsx"
+    "**/*.jsx",
+    "eslint.config.js"
   ],
   "exclude": [
     "node_modules",
