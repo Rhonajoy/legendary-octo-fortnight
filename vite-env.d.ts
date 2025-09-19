@@ -2,15 +2,9 @@
 
 interface ImportMetaEnv {
   readonly VITE_MOVIE_API_KEY: string;
-  // add others as needed
+  // add more env vars here if needed
 }
 
 interface ImportMeta {
   readonly env: ImportMetaEnv;
-}
-
-declare namespace NodeJS {
-  interface ProcessEnv {
-    VITE_MOVIE_API_KEY: string;
-  }
 }

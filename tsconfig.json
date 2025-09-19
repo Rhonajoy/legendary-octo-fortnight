@@ -38,7 +38,8 @@
     "jest.config.cjs",
     "vite.config.ts",
     "jest.setup.ts",
-    "postcss.config.ts"
+    "postcss.config.ts",
+    "vite-env.d.ts"
   ],
   "exclude": [
     "node_modules",

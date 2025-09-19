@@ -1,5 +1,9 @@
 const API_BASE = "https://api.themoviedb.org/3";
-const ACCESS_TOKEN: string =process.env.VITE_MOVIE_API_KEY 
+const ACCESS_TOKEN: string | undefined = import.meta.env.VITE_MOVIE_API_KEY;
+
+if (!ACCESS_TOKEN) {
+  throw new Error("VITE_MOVIE_API_KEY is not defined in the environment variables.");
+}
 
 
 export interface Movie {
