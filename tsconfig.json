@@ -1,49 +1,23 @@
 {
+  "files": [],
+  "references": [
+   {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ],
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    
-    /* Linting & Strictness */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true,
-    
-    /* Path Aliases */
+    "emitDeclarationOnly": false,
+    "declaration": false,
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     },
-    
-    /* Type Definitions */
     "types": [
       "jest",
       "@testing-library/jest-dom"
-    ]
+    ],
   },
-  "include": [
-    "src",
-    "tailwind.config.ts",
-    "jest.config.cjs",
-    "vite.config.ts",
-    "jest.setup.ts",
-    "postcss.config.ts",
-    "eslint.config.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".next",
-    "out"
-  ]
 }

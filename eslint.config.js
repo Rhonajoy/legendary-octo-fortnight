@@ -8,11 +8,14 @@ export default [
  
   {
     ignores: [
+      "**/*.d.ts", 
       "node_modules/",
       "dist/",
       "build/",
       ".next/",
       "out/",
+      "eslint.config.js",
+      "jest.setup.cjs"
     ],
   },
   
@@ -22,7 +25,7 @@ export default [
   
 
   {
-    files: ["**/*.{ts,tsx,js,jsx}"],
+    files: ["**/*.{ts,tsx,js,jsx}",],
     plugins: {
       react,
     },
