@@ -1,5 +1,4 @@
-// src/tests/Service/movieService.test.ts
-process.env.VITE_MOVIE_API_KEY = "test_key";
+
 import { fetchMovieDetails, searchMovies } from "../../Services/MovieService";
 import type { Movie } from "../../Services/MovieService";
 

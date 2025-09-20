@@ -48,7 +48,7 @@ export default function MovieModal({
           id="movie-modal-title"
           className="text-xl font-bold text-rose-600 mb-5 tracking-tight"
         >
-          🎬 Movie Details
+           Movie Details
         </h2>
 
         <div className="text-center">

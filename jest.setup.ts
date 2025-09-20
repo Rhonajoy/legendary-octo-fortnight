@@ -1,5 +1,2 @@
-import '@testing-library/jest-dom'
-module.exports = {
+import '@testing-library/jest-dom';
 
-setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
-};

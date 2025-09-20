@@ -1,18 +1,12 @@
-// vite.config.ts
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-
 export default defineConfig(({ mode }) => {
 
-  
-  // Load env file for the current mode
-  const env = loadEnv(mode, process.cwd(), "");
+const env = loadEnv(mode, process.cwd(), "");
 
-  // filter or pick the VITE_ variables you want to expose
-  // We'll prepare define object
-  // The define option needs stringified values
-  const defineEnv = Object.keys(env)
+ 
+const defineEnv = Object.keys(env)
     .filter((key) => key.startsWith("VITE_"))
     .reduce((acc, key) => {
       acc[`process.env.${key}`] = JSON.stringify(env[key]);
@@ -35,7 +29,7 @@ export default defineConfig(({ mode }) => {
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            return 'vendor'; // Groups all dependencies into a single chunk
+            return 'vendor';
           }
         },
       },
